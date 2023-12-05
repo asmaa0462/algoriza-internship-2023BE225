@@ -1,10 +1,9 @@
-using Core.Data;
-using Domain.Interfaces;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
-using Repo.Data;
-using Repo.Repository;
+using RepositoryL.Data;
+using RepositoryL.Interfaces;
+using RepositoryL.Repository;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);

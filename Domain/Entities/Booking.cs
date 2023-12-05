@@ -1,5 +1,4 @@
-﻿using Core.Entities;
-using Domain.Entities.Enum;
+﻿using Domain.Entities.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

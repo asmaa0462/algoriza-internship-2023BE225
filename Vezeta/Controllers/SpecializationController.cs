@@ -1,8 +1,7 @@
-﻿using Core.Entities;
-using Domain.Interfaces;
+﻿using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Repo.Repository;
+using RepositoryL.Interfaces;
 
 namespace Vezeta.API.Controllers
 {
@@ -10,13 +9,14 @@ namespace Vezeta.API.Controllers
     [ApiController]
     public class SpecializationController : ControllerBase
     {
-        private readonly BaseRepository<Specialization> _specializationRepository;
-        public SpecializationController(IBaseRepository<Specialization> specializationRepository)
+        private readonly IBaseRepository<Specialization> _specializationRepository;
+        public SpecializationController(IBaseRepository<Specialization> baseRepository)
         {
-            _specializationRepository = (BaseRepository<Specialization>?)specializationRepository;
+
+            _specializationRepository = baseRepository;
         }
         [HttpGet]
-        public IActionResult GetById() 
+        public IActionResult GetById()
         {
             return Ok(_specializationRepository.GetById(1));
         }
@@ -29,7 +29,14 @@ namespace Vezeta.API.Controllers
         [HttpGet("GetByName")]
         public IActionResult GetByName()
         {
-            return Ok(_specializationRepository.Find(b=>b.SpecializationName == "Oncology"));
+            return Ok(_specializationRepository.Find(b => b.SpecializationName == "Oncology"));
         }
+        [HttpDelete("DeleteById")]
+        public IActionResult DeleteById()
+        {
+            return Ok(_specializationRepository.Find(b => b.SpecializationName == "Oncology"));
+        }
+        
+
     }
 }

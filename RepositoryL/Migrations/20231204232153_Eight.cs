@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Core.Migrations
+namespace RepositoryL.Migrations
 {
     /// <inheritdoc />
     public partial class Eight : Migration

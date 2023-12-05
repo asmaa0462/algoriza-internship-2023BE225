@@ -1,6 +1,6 @@
-﻿using Core.Data;
-using Domain.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using RepositoryL.Data;
+using RepositoryL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,24 +8,26 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repo.Repository
+namespace RepositoryL.Repository
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
+        
         protected ApplicationDbContext _context;
         public BaseRepository(ApplicationDbContext context)
         {
             _context = context;
         }
-        public void Delete(int id)
+        public void Delete(T entity)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Remove(entity);
+            
         }
-
         public T Find(Expression<Func<T, bool>> match)
         {
             return _context.Set<T>().SingleOrDefault(match);
         }
+
         public IEnumerable<T> GetAll()
         {
             return _context.Set<T>().ToList();
@@ -38,17 +40,31 @@ namespace Repo.Repository
 
         public void Insert(T entity)
         {
-            throw new NotImplementedException();
+            if (entity is null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            else
+            {
+                _context.Set<T>().Add(entity);
+                _context.SaveChanges();
+            }
         }
 
-        public void Savechanges()
+        public T Update(T entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Update(T entity)
-        {
-            throw new NotImplementedException();
+            if (entity is null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            else
+            {
+                _context.Set<T>().Update(entity);
+                _context.SaveChanges();
+                return entity;
+            }
+            
+            
         }
     }
 }

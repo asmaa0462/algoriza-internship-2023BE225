@@ -1,14 +1,12 @@
-﻿using Core.Entities;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Repo.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Data
+namespace RepositoryL.Data
 {
     public class ApplicationDbContext : DbContext
     {

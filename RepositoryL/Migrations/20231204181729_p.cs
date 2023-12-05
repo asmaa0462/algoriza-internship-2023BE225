@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Core.Migrations
+namespace RepositoryL.Migrations
 {
     /// <inheritdoc />
     public partial class p : Migration

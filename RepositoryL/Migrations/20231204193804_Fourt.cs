@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Core.Migrations
+namespace RepositoryL.Migrations
 {
     /// <inheritdoc />
     public partial class Fourt : Migration
