@@ -2,6 +2,7 @@
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Repo.Repository;
 
 namespace Vezeta.API.Controllers
 {
@@ -9,10 +10,10 @@ namespace Vezeta.API.Controllers
     [ApiController]
     public class SpecializationController : ControllerBase
     {
-        private readonly IBaseRepository<Specialization> _specializationRepository;
+        private readonly BaseRepository<Specialization> _specializationRepository;
         public SpecializationController(IBaseRepository<Specialization> specializationRepository)
         {
-            _specializationRepository = specializationRepository;
+            _specializationRepository = (BaseRepository<Specialization>?)specializationRepository;
         }
         [HttpGet]
         public IActionResult GetById() 

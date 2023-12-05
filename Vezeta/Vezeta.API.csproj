@@ -22,11 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\Repo.csproj" />
+    <Folder Include="Controllers\SpecialController\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\SpecialController\" />
+    <ProjectReference Include="..\RepositoryL\RepositoryL.csproj" />
   </ItemGroup>
 
 </Project>
