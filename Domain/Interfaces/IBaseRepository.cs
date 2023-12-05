@@ -12,7 +12,6 @@ namespace Domain.Interfaces
         IEnumerable<T> GetAll();
         T GetById(int id);
         T Find (Expression<Func<T, bool>> match);
-        //T Find(Expression<Func<T, bool>> match, string[] includes = null);//if if i have like book I could represent data of authors also in it 
         void Insert(T entity);
         void Update(T entity);
         void Delete(int id);

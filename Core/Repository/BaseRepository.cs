@@ -26,14 +26,6 @@ namespace Repo.Repository
         {
             return _context.Set<T>().SingleOrDefault(match);
         }
-        /**public override T Find(Expression<Func<T, bool>> match, string[] includes = null)
-        {
-            IQueryable<T> query = _context.Set<T>();
-            if (includes != null)
-                foreach (var include in includes)
-                    query = query.Include(include);
-            return query.SingleOrDefault(match);
-        }**/
         public IEnumerable<T> GetAll()
         {
             return _context.Set<T>().ToList();

@@ -24,16 +24,11 @@ namespace Vezeta.API.Controllers
         {
             return Ok(_specializationRepository.GetAll());
         }
+        //still need to change
         [HttpGet("GetByName")]
         public IActionResult GetByName()
         {
             return Ok(_specializationRepository.Find(b=>b.SpecializationName == "Oncology"));
         }
-        /**
-        [HttpGet("GetByName")]
-        public IActionResult GetByName()
-        {
-            return Ok(_specializationRepository.Find(b => b.SpecializationName == "Oncology", new[] { "Doctor" }));
-        }**/
     }
 }
