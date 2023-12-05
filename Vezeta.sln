@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34322.80
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vezeta.API", "Vezeta\Vezeta.API.csproj", "{D9CCD92A-1F29-4209-AE5E-2B6F8B7E1910}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repo", "Core\Repo.csproj", "{7340B3D3-2002-4B64-82BE-B9EC6CA1EA2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{1A90179A-EA65-469C-89CD-156DBC36156C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9CCD92A-1F29-4209-AE5E-2B6F8B7E1910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9CCD92A-1F29-4209-AE5E-2B6F8B7E1910}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9CCD92A-1F29-4209-AE5E-2B6F8B7E1910}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9CCD92A-1F29-4209-AE5E-2B6F8B7E1910}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7340B3D3-2002-4B64-82BE-B9EC6CA1EA2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7340B3D3-2002-4B64-82BE-B9EC6CA1EA2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7340B3D3-2002-4B64-82BE-B9EC6CA1EA2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7340B3D3-2002-4B64-82BE-B9EC6CA1EA2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A90179A-EA65-469C-89CD-156DBC36156C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A90179A-EA65-469C-89CD-156DBC36156C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A90179A-EA65-469C-89CD-156DBC36156C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A90179A-EA65-469C-89CD-156DBC36156C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B96058E8-3718-4140-9BA8-1482231EFB15}
+	EndGlobalSection
+EndGlobal
