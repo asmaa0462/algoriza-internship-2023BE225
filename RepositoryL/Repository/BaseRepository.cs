@@ -12,20 +12,31 @@ namespace RepositoryL.Repository
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        
-        protected ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         public BaseRepository(ApplicationDbContext context)
         {
             _context = context;
+            
         }
         public void Delete(T entity)
         {
             _context.Set<T>().Remove(entity);
-            
+            _context.SaveChanges();
         }
+
         public T Find(Expression<Func<T, bool>> match)
         {
             return _context.Set<T>().SingleOrDefault(match);
+        }
+
+        public IQueryable<T> FindAll()
+        {
+            return _context.Set<T>().AsNoTracking();
+        }
+
+        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
+        {
+            return _context.Set<T>().Where(expression).AsNoTracking();
         }
 
         public IEnumerable<T> GetAll()
@@ -33,6 +44,7 @@ namespace RepositoryL.Repository
             return _context.Set<T>().ToList();
         }
 
+        //check for id
         public T GetById(int id)
         {
             return _context.Set<T>().Find(id);
@@ -40,7 +52,7 @@ namespace RepositoryL.Repository
 
         public void Insert(T entity)
         {
-            if (entity is null)
+            if(entity is null)
             {
                 throw new ArgumentNullException("entity");
             }
@@ -63,8 +75,6 @@ namespace RepositoryL.Repository
                 _context.SaveChanges();
                 return entity;
             }
-            
-            
         }
     }
 }

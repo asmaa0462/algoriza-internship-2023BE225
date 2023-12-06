@@ -11,8 +11,9 @@ namespace RepositoryL.Interfaces
     {
         IEnumerable<T> GetAll();
         T GetById(int id);
+        IQueryable<T> FindAll();
         T Find (Expression<Func<T, bool>> match);
-        //T FindAll(Expression<Func<T, bool>> match);
+        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression);
         void Insert(T entity);
         T Update(T entity);
         void Delete(T entity);

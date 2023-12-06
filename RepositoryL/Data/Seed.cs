@@ -62,6 +62,16 @@ namespace RepositoryL.Data
                 {
                     SpecializationId = 10,
                     SpecializationName = "Foot and ankle orthopedics"
+                },
+                new Specialization
+                {
+                    SpecializationId = 11,
+                    SpecializationName = "Dentistry"
+                },
+                new Specialization
+                {
+                SpecializationId = 12,
+                    SpecializationName = "Gastroenterology"
                 }
                 );
 
