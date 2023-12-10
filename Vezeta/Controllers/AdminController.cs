@@ -98,8 +98,8 @@ namespace Vezeta.API.Controllers
         public async Task<IActionResult> GetALlPatients([FromQuery] PaginationFilter filter)
         {
             var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize, filter.Search);
-            var resposne = await _unit._patient.GetAllAsync();
-            return Ok(resposne);
+            await _unit._patient.GetAllAsync();
+            return Ok();
         }
 
         //Get PatientById
@@ -107,31 +107,31 @@ namespace Vezeta.API.Controllers
         [HttpGet("{GetPatientById}")]
         public async Task<IActionResult> GetPatientById(int id)
         {
-            var result = await _unit._patient.GetbyIdAsync(id);
-            return Ok(result);
+            await _unit._patient.GetbyIdAsync(id);
+            return Ok();
         }
         //AddDiscount
         [Authorize(Roles = "Admin")]
         [HttpPost("{AddDiscount}")]
         public async Task<IActionResult> AddDiscount([FromBody] UpdateDiscountDto discount)
         {
-            await _context.AddAsync(discount);
+            _context.AddAsync(discount);
             await _unit.SaveAsync();
-            return Ok(true);
+            return Ok();
         }
         //UpdateDiscount
         [Authorize(Roles = "Admin")]
         [HttpPut("{UpdateDiscount}")]
         public async Task<IActionResult> UpdateDiscount([FromBody] UpdateDiscountDto discount)
         {
-            var res = await _unit._discount.FindAll().FirstOrDefaultAsync(i => i.discountId == discount.Discount_id);
+            var res =  _unit._discount.FindAll().FirstOrDefaultAsync(i => i.discountId == discount.Discount_id);
             if (res is null)
             {
                 return NotFound();
             }
             _mapper.Map(discount, res);
             await _unit.SaveAsync();
-            return Ok(true);
+            return Ok();
         }
 
         //DeleteDiscount
@@ -139,7 +139,7 @@ namespace Vezeta.API.Controllers
         [HttpDelete("{DeleteDiscount}")]
         public async Task<IActionResult> DeleteDiscount(int id)
         {
-            var q = await _unit._discount.GetbyIdAsync(id);
+            var q = _unit._discount.GetbyIdAsync(id);
             if (q is null)
             {
                 return NotFound("Doctor Not Found");
@@ -153,7 +153,7 @@ namespace Vezeta.API.Controllers
         [HttpPut("{DeactiveDiscount}")]
         public async Task<IActionResult> DeactiveDiscount(int id)
         {
-            var doct = await _unit._discount.GetbyIdAsync(id);
+            var doct = _unit._discount.GetbyIdAsync(id);
             if (doct is null)
             {
                 return NotFound("Discount Not Found");
