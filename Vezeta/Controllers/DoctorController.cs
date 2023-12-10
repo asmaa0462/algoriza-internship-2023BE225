@@ -38,7 +38,7 @@ namespace Vezeta.API.Controllers
         {
             await _context.AddAsync(appointment);
             await _unit.SaveAsync();
-            return Ok(true);
+            return Ok();
         }
         //UpdateAppointment
         [Authorize(Roles = "Doctor")]
@@ -50,7 +50,7 @@ namespace Vezeta.API.Controllers
             if (timeid == t.timeId &&!( book.BookState == BookState.Pending))
                 _context.Update(t);
             await _unit.SaveAsync();
-            return Ok(true);
+            return Ok();
         }
         //Delete Appointment
         [Authorize(Roles = "Doctor")]
@@ -65,7 +65,7 @@ namespace Vezeta.API.Controllers
                 _context.Update(t);
             }
             await _context.SaveChangesAsync();
-            return Ok(true);
+            return Ok();
         }
         
         //confirm to Complete
