@@ -43,8 +43,8 @@ namespace Vezeta.API.Controllers
         public async Task<IActionResult> GetALlDoctor([FromQuery] PaginationFilter filter)
         {
             var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize ,filter.Search);
-            _unit._doctor.GetAllAsync();
-            return Ok(_unit._doctor.GetAllAsync());
+            await _unit._doctor.GetAllAsync();
+            return Ok();
         }
         //Get Doctor By ID
         [Authorize(Roles = "Admin")]
