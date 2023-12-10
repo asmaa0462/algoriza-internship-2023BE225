@@ -39,16 +39,16 @@ namespace Vezeta.API.Controllers
 
         //Get All Doctor
         [Authorize(Roles = "Admin")]
-        [HttpGet("{GetAllDoctors}")]
+        [HttpGet("GetallDoctor")]
         public async Task<IActionResult> GetALlDoctor([FromQuery] PaginationFilter filter)
         {
             var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize ,filter.Search);
-            await _unit._doctor.GetAllAsync();
-            return Ok();
+            var result = await _unit._doctor.GetAllAsync();
+            return Ok(result);
         }
         //Get Doctor By ID
         [Authorize(Roles = "Admin")]
-        [HttpGet("{GetDoctorById}")]
+        [HttpGet("Getdoctorbyid")]
         public async Task<IActionResult> GetDoctorById(int id)
         {
             var result = _unit._doctor.GetbyId(id);
@@ -94,7 +94,7 @@ namespace Vezeta.API.Controllers
         
         //GetAllPatient
         [Authorize(Roles = "Admin")]
-        [HttpGet("{GetAllPatients}")]
+        [HttpGet("Getallpatient")]
         public async Task<IActionResult> GetALlPatients([FromQuery] PaginationFilter filter)
         {
             var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize, filter.Search);
@@ -104,7 +104,7 @@ namespace Vezeta.API.Controllers
 
         //Get PatientById
         [Authorize(Roles = "Admin")]
-        [HttpGet("{GetPatientById}")]
+        [HttpGet("GetPatientbyid")]
         public async Task<IActionResult> GetPatientById(int id)
         {
             await _unit._patient.GetbyIdAsync(id);
@@ -112,7 +112,7 @@ namespace Vezeta.API.Controllers
         }
         //AddDiscount
         [Authorize(Roles = "Admin")]
-        [HttpPost("{AddDiscount}")]
+        [HttpPost("AddDiscount")]
         public async Task<IActionResult> AddDiscount([FromBody] UpdateDiscountDto discount)
         {
             _context.AddAsync(discount);
@@ -121,7 +121,7 @@ namespace Vezeta.API.Controllers
         }
         //UpdateDiscount
         [Authorize(Roles = "Admin")]
-        [HttpPut("{UpdateDiscount}")]
+        [HttpPut("updateDiscount")]
         public async Task<IActionResult> UpdateDiscount([FromBody] UpdateDiscountDto discount)
         {
             var res =  _unit._discount.FindAll().FirstOrDefaultAsync(i => i.discountId == discount.Discount_id);
@@ -136,7 +136,7 @@ namespace Vezeta.API.Controllers
 
         //DeleteDiscount
         [Authorize(Roles = "Admin")]
-        [HttpDelete("{DeleteDiscount}")]
+        [HttpDelete("DeleteDiscount")]
         public async Task<IActionResult> DeleteDiscount(int id)
         {
             var q = _unit._discount.GetbyIdAsync(id);
@@ -150,7 +150,7 @@ namespace Vezeta.API.Controllers
         }
         //DeactiveDiscount
         [Authorize(Roles = "Admin")]
-        [HttpPut("{DeactiveDiscount}")]
+        [HttpPut("DeactiveDiscount")]
         public async Task<IActionResult> DeactiveDiscount(int id)
         {
             var doct = _unit._discount.GetbyIdAsync(id);
@@ -175,7 +175,7 @@ namespace Vezeta.API.Controllers
         }
         //numofRequst
         [Authorize(Roles = "Admin")]
-        [HttpGet("{NumberOfReqursted}")]
+        [HttpGet("Numberofrequests")]
         public async Task<IActionResult> GetRequests()
         {
             await _unit._patient.FindAll().OrderBy(i => i.NumberofRequest).CountAsync();
