@@ -24,14 +24,14 @@ namespace Vezeta.API.Controllers
     [ApiController]
     public class DoctorController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly AppDbContext _context;
         private readonly IUnitOfWork _unit;
-        public DoctorController(ApplicationDbContext context,IUnitOfWork unit)
+        public DoctorController(AppDbContext context,IUnitOfWork unit)
         {
             _context = context;
             _unit = unit;
         }
-        //Add Appointment
+       //Add Appointment
         [Authorize(Roles = "Doctor")]
         [HttpPost("Confirm Booking")]
         public async Task<ActionResult> CreateAppointment([FromBody] CreateAppointmentDto appointment)
@@ -67,20 +67,21 @@ namespace Vezeta.API.Controllers
             await _context.SaveChangesAsync();
             return Ok(true);
         }
-        //
+        
         //confirm to Complete
         [Authorize(Roles = "Doctor")]
-        [HttpPut("Confirm Booking")]
-        public async Task<ActionResult> ConfirmRequest(int bookid)
+        [HttpPut("ConfirmBooking")]
+        public  ActionResult ConfirmRequest(int bookid)
         {
-            var book = new UpdateBookingDto();
-            if (bookid == book.bookId)
+            var book = new Booking();
+            if (_unit._booking.GetbyId(bookid) is null)
             {
-                book.BookState = BookState.Complete;
-                _context.Update(book);
+                return (NotFound());
             }
-            await _context.SaveChangesAsync();
-            return Ok(true);
+            book.BookState = BookState.Complete;
+            _context.Update(book);
+            _unit.Save();
+            return Ok();
         }
         //GetAll
         [Authorize(Roles = "Doctor")]

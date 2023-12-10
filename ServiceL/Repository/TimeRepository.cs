@@ -12,7 +12,7 @@ namespace ServiceL.Repository
 {
     internal class TimeRepository : RepositoryBase<TimeAppointment>, ITimeRepository
     {
-        public TimeRepository(ApplicationDbContext context) : base(context)
+        public TimeRepository(AppDbContext context) : base(context)
         {
         }
     }

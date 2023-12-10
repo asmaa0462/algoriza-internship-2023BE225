@@ -12,7 +12,7 @@ namespace ServiceL.Repository
 {
     internal class SpecializationRepository : RepositoryBase<Specialization>, ISpecializationRepository
     {
-        public SpecializationRepository(ApplicationDbContext context) : base(context)
+        public SpecializationRepository(AppDbContext context) : base(context)
         {
         }
     }

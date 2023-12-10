@@ -12,7 +12,7 @@ namespace ServiceL.Repository
 {
     public class BookingRepository : RepositoryBase<Booking>, IBookingRepository
     {
-        public BookingRepository(ApplicationDbContext context) : base(context)
+        public BookingRepository(AppDbContext context) : base(context)
         {
 
         }

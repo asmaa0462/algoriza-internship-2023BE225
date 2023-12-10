@@ -24,10 +24,10 @@ namespace Vezeta.API.Controllers
     [ApiController]
     public class AdminController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+       private readonly AppDbContext _context;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unit;
-        public AdminController(ApplicationDbContext context, IUnitOfWork unit,IMapper mapper)
+        public AdminController(AppDbContext context, IUnitOfWork unit,IMapper mapper)
         {
             
             _mapper = mapper;
@@ -43,8 +43,8 @@ namespace Vezeta.API.Controllers
         public async Task<IActionResult> GetALlDoctor([FromQuery] PaginationFilter filter)
         {
             var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize ,filter.Search);
-            var resposne = await _unit._doctor.GetAllAsync();
-            return Ok(resposne);
+            _unit._doctor.GetAllAsync();
+            return Ok(_unit._doctor.GetAllAsync());
         }
         //Get Doctor By ID
         [Authorize(Roles = "Admin")]
@@ -80,8 +80,7 @@ namespace Vezeta.API.Controllers
         //DeleteDoctor
         [Authorize(Roles = "Admin")]
         [HttpDelete("DeleteDoctor")]
-        [Route("delete/{id}")]
-        public async Task<IActionResult> DeleteDoctor([FromRoute]int id)
+        public async Task<IActionResult> DeleteDoctor(int id)
         {
             var doct = await _unit._doctor.FindAll().FirstOrDefaultAsync(i => i.Id == id);
             if (doct is null)
@@ -92,7 +91,7 @@ namespace Vezeta.API.Controllers
             await _context.SaveChangesAsync();
             return Ok("Delete");
         }
-
+        
         //GetAllPatient
         [Authorize(Roles = "Admin")]
         [HttpGet("{GetAllPatients}")]
@@ -152,8 +151,7 @@ namespace Vezeta.API.Controllers
         //DeactiveDiscount
         [Authorize(Roles = "Admin")]
         [HttpPut("{DeactiveDiscount}")]
-        [Route("update/{id}")]
-        public async Task<IActionResult> DeactiveDiscount([FromRoute] int id)
+        public async Task<IActionResult> DeactiveDiscount(int id)
         {
             var doct = await _unit._discount.GetbyIdAsync(id);
             if (doct is null)
@@ -169,11 +167,11 @@ namespace Vezeta.API.Controllers
  
         //NumofPatient
         [Authorize(Roles = "Admin")]
-        [HttpGet("{NumodfPatients}")]
-        public async Task<IActionResult> GetPatientNum()
+        [HttpGet("numberofpatient")]
+        public  ActionResult GetPatientNum()
         {
-            var number = await _unit._patient.FindAll().CountAsync();
-            return Ok(number);
+            _unit._patient.FindAll();
+            return Ok();
         }
         //numofRequst
         [Authorize(Roles = "Admin")]
@@ -184,6 +182,7 @@ namespace Vezeta.API.Controllers
 
             return Ok();
         }
+        
         //top 5 Specialization
         [Authorize(Roles = "Admin")]
         [HttpGet("Top 5 Doctors")]

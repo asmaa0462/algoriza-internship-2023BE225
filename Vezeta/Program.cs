@@ -17,7 +17,7 @@ builder.Services.AddTransient(typeof(IUnitOfWork),typeof(UnitOfWork));
 //Mapper
 builder.Services.AddAutoMapper(typeof(AutoMapperConfigProfile));
 //Configure EntityFrameWork with SQL Server
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("conn"));
 });
@@ -28,7 +28,7 @@ builder.Services.AddIdentity<IdentityUser,IdentityRole>(Options =>
     Options.Password.RequireDigit = true;
     Options.Password.RequireLowercase = true;
     Options.Password.RequiredLength = 8;
-}).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+}).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

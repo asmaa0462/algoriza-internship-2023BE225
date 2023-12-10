@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RepositoryL.Migrations
 {
     /// <inheritdoc />
-    public partial class fjkh : Migration
+    public partial class ne : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +20,7 @@ namespace RepositoryL.Migrations
                     AppointmentId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Days = table.Column<int>(type: "int", nullable: false),
-                    PriceEntry = table.Column<int>(type: "int", nullable: false)
+                    Price = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -228,15 +228,17 @@ namespace RepositoryL.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     image = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<int>(type: "int", nullable: false),
                     DateBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
                     price = table.Column<int>(type: "int", nullable: true),
-                    doctorid = table.Column<int>(type: "int", nullable: true),
                     SpecializationId = table.Column<int>(type: "int", nullable: true),
-                    NumberofRequest = table.Column<long>(type: "bigint", nullable: true),
+                    doctorid = table.Column<int>(type: "int", nullable: true),
+                    numberOfRequests = table.Column<int>(type: "int", nullable: true),
+                    NumberofRequest = table.Column<int>(type: "int", nullable: true),
                     PatientId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -326,6 +328,16 @@ namespace RepositoryL.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "27da7809-cabc-472c-844c-98e998a509f4", null, "Patient", null },
+                    { "37c5e62a-8d6a-45f2-b652-090e9059a15d", null, "Doctor", null },
+                    { "c653cbf9-52b0-4cb5-8436-b08171dec1c3", null, "Admin", null }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Specializations",
                 columns: new[] { "SpecializationId", "SpecializationName" },
                 values: new object[,]
@@ -342,6 +354,27 @@ namespace RepositoryL.Migrations
                     { 10, "Foot and ankle orthopedics" },
                     { 11, "Dentistry" },
                     { 12, "Gastroenterology" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "DateBirth", "Discriminator", "Email", "FirstName", "Gender", "LastName", "Password", "Phone", "SpecializationId", "doctorid", "image", "numberOfRequests", "price" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(1995, 12, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "ahmedali@bit.com", "Ahmed", 1, "Ali", "PO-k?$rn", "012345678", 8, 0, "images/1.jpeg", 0, 200 },
+                    { 2, new DateTime(1978, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "mohamedhosam@bit.com", "Mohamed", 1, "Hosam", "(UHp'Nkh", "02456972", 7, 0, "images/2.jpeg", 0, 200 },
+                    { 3, new DateTime(1985, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "mahmoudwael@bit.com", "Mahmoud", 1, "Wael", "n`6Jy}+z", "01246875", 5, 0, "images/3.jpeg", 0, 200 },
+                    { 4, new DateTime(1992, 4, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "hamzawaleed@bit.com", "Hamza", 1, "Waleed", "6(@Ksr5c", "012364799", 4, 0, "images/4.jpeg", 0, 200 },
+                    { 5, new DateTime(1993, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "omartaher@bit.com", "Omar", 1, "Taher", "6+d$e#Js", "01268958", 1, 0, "images/5.jpeg", 0, 200 },
+                    { 6, new DateTime(1992, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "yousefhamed@bit.com", "Yousef", 1, "Hamed", "qt;<}Kjh", "0145588", 2, 0, "images/6.jpeg", 0, 200 },
+                    { 7, new DateTime(1997, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "khaledramzy@bit.com", "Khaled", 1, "Razmy", "8)Q`wkP$", "013678526", 3, 0, "images/7.jpeg", 0, 200 },
+                    { 8, new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "yasersayed@bit.com", "yaser", 1, "sayed", "P<!=W6fe", "01369885", 9, 0, "images/8.jpeg", 0, 200 },
+                    { 9, new DateTime(1987, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "amrahmed", "Amr", 1, "Ahmed", "l)OJ*VkB", "0123648796", 10, 0, "images/9.jpeg", 0, 200 },
+                    { 10, new DateTime(1995, 2, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "ayaahmed", "Aya", 0, "Ahmed", "ynz#Jpsg", "0123546", 11, 0, "images/10.jpeg", 0, 200 },
+                    { 11, new DateTime(1996, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "hanaamagdy@bit.com", "Hanaa", 0, "Magdy", "zNH:gT7w", "0197586413", 12, 0, "images/11.jpeg", 0, 200 },
+                    { 12, new DateTime(1998, 4, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "halamodamed@bit.com", "Hala", 0, "Mohamed", "#;b*D+x$", "010955487652", 8, 0, "images/12.jpeg", 0, 200 },
+                    { 13, new DateTime(1994, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "fatmasafwt@@bit.com", "Fatma", 0, "Safwt", "]Q,X$|ri", "01269753684", 12, 0, "images/13.jpeg", 0, 200 },
+                    { 14, new DateTime(1991, 6, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "masaadham@bit.com", "yara", 0, "Ayman", "VXFlvL2d", "0125873", 3, 0, "images/14.jpeg", 0, 200 }
                 });
 
             migrationBuilder.CreateIndex(

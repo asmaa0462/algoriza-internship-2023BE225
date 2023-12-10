@@ -14,7 +14,7 @@ namespace ServiceL.Interface
 {
     public class PatientRepository : RepositoryBase<Patient> , IPatientRepository
     {
-        public PatientRepository(ApplicationDbContext context) : base(context)
+        public PatientRepository(AppDbContext context) : base(context)
         {
         }
 

@@ -12,7 +12,7 @@ namespace ServiceL.Repository
 {
     public class DiscountRepository : RepositoryBase<Discount>, IDiscountRepository
     {
-        public DiscountRepository(ApplicationDbContext context) : base(context)
+        public DiscountRepository(AppDbContext context) : base(context)
         {
         }
     }

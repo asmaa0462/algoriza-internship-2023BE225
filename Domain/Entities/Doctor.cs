@@ -14,7 +14,6 @@ namespace Domain.Entities
         public int SpecializationId {  get; set; }
         public ICollection<Appointment> Appointments { get; set; }
         public int doctorid {  get; set; }
-        public string doctorname { get; set; }
         public int numberOfRequests {  get; set; } = 0;
         public List<DoctorsAppointments> doctorsAppointments { get; set; }
     }

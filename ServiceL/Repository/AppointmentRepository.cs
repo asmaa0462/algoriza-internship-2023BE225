@@ -12,7 +12,7 @@ namespace ServiceL.Repository
 {
     public class AppointmentRepository : RepositoryBase<Appointment>, IAppointmentRepository
     {
-        public AppointmentRepository(ApplicationDbContext context) : base(context)
+        public AppointmentRepository(AppDbContext context) : base(context)
         {
         }
     }

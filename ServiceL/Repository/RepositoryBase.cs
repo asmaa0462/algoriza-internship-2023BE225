@@ -13,8 +13,8 @@ namespace ServiceL.Repository
 {
     public abstract class RepositoryBase<T> : IRepository<T> where T : class
     {
-        protected ApplicationDbContext _context { get; set; }
-        public RepositoryBase(ApplicationDbContext context)
+        protected AppDbContext _context { get; set; }
+        public RepositoryBase(AppDbContext context)
         {
             _context = context;
         }

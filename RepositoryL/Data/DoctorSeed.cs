@@ -12,7 +12,7 @@ namespace RepositoryL.Data
 {
     public static class DoctorSeed
     {
-        public static async Task doctorseed(this ModelBuilder modelbuilder)
+        public static void doctorseed(this ModelBuilder modelbuilder)
         {
 
              modelbuilder.Entity<Doctor>().HasData(
@@ -214,7 +214,7 @@ namespace RepositoryL.Data
                         SpecializationId = 3
                     }   
               );
-            ;
+            
         }
     }
 }

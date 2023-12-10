@@ -11,7 +11,7 @@ namespace Domain.Entities
     {
         public int AppointmentId { get; set; }
         public Days Days { get; set; }
-        public int PriceEntry { get; set; }
+        public int Price { get; set; }
         public ICollection<Doctor> Doctors { get; set; }
         public List<DoctorsAppointments> doctorsAppointments { get; set; }
         

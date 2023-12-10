@@ -18,10 +18,10 @@ namespace Vezeta.API.Controllers
     [ApiController]
     public class AcountController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly AppDbContext _context;
         private readonly UserManager<User> _userManager;
         
-        public AcountController(ApplicationDbContext context,UserManager<User> userManager)
+        public AcountController(AppDbContext context,UserManager<User> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -49,7 +49,7 @@ namespace Vezeta.API.Controllers
                 Phone = request.Phone,
                 Email = request.Email
             };
-            _context.Users.Add(user);
+            _context.Add(user);
             await _userManager.AddToRoleAsync(user, "Patient");
             await _context.SaveChangesAsync();
 
@@ -70,7 +70,5 @@ namespace Vezeta.API.Controllers
             }
             return Ok($"Welcome back, {user.Email}");
         }
-        
-
     }
 }

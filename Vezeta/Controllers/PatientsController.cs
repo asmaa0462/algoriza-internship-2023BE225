@@ -19,9 +19,9 @@ namespace Vezeta.API.Controllers
     public class PatientsController : ControllerBase
     {
         private readonly IUnitOfWork _unit;
-        private readonly ApplicationDbContext _context;
+        private readonly AppDbContext _context;
         
-        public PatientsController(IUnitOfWork unit , ApplicationDbContext context)
+        public PatientsController(IUnitOfWork unit , AppDbContext context)
         {
             _context = context;
             _unit = unit;
@@ -36,6 +36,7 @@ namespace Vezeta.API.Controllers
             var response = await _unit._doctor.GetAllAsync();
             return Ok(response);
         }
+        
         //Search by time And Discount Copoun
         [Authorize(Roles = "Patient")]
         [HttpGet("SearchByTimeId And Copoun")]
@@ -112,6 +113,6 @@ namespace Vezeta.API.Controllers
             var Result = await _unit._appoint.GetAllAsync();
             return Ok(Result);
         }
-    
+   
     }
 }

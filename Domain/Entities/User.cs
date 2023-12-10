@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class User :IdentityUser
+    public class User 
     {
         public int Id { get; set; }
 

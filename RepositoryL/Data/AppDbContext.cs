@@ -1,32 +1,28 @@
 ﻿using Domain.Entities;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace RepositoryL.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class AppDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
             
         }
         DbSet<User> Users { get; set; }
-        DbSet<Doctor>Doctors { get; set; }
+        DbSet<Doctor> Doctors { get; set; }
         DbSet<Patient> Patients { get; set; }
         DbSet<Specialization> Specializations { get; set; }
         DbSet<Appointment> Appointments { get; set; }
         DbSet<Booking> Bookings { get; set; }
         DbSet<Discount> Discounts { get; set; }
-        DbSet<TimeAppointment>TimeAppointments { get; set; }
-
+        DbSet<TimeAppointment> TimeAppointments { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -87,13 +83,10 @@ namespace RepositoryL.Data
             modelBuilder.seed();
             //Admin Seed doctor Data
             modelBuilder.doctorseed();
-            
+
             //RolesSeed
             modelBuilder.rolesseed();
-           
-        }
 
+        }
     }
 }
-
-

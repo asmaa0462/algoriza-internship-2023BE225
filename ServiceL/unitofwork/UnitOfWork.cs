@@ -15,7 +15,7 @@ namespace ServiceL.unitofwork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly ApplicationDbContext _context;
+        private readonly AppDbContext _context;
         public ITimeRepository _time { get; private set; }
         public IBookingRepository _book { get; private set; }
         public IAppointmentRepository _appointment { get; private set; }
@@ -28,7 +28,7 @@ namespace ServiceL.unitofwork
 
         public IBookingRepository _booking => throw new NotImplementedException();
 
-        public UnitOfWork(ApplicationDbContext context)
+        public UnitOfWork(AppDbContext context)
         {
             _context = context;
             _time = new TimeRepository(_context);

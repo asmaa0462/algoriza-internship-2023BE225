@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RepositoryL.Data;
 
@@ -11,12 +10,10 @@ using RepositoryL.Data;
 
 namespace RepositoryL.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231207215027_hoo")]
-    partial class hoo
+    [DbContext(typeof(AppDbContext))]
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +33,7 @@ namespace RepositoryL.Migrations
                     b.Property<int>("Days")
                         .HasColumnType("int");
 
-                    b.Property<int>("PriceEntry")
+                    b.Property<int>("Price")
                         .HasColumnType("int");
 
                     b.HasKey("AppointmentId");
@@ -227,8 +224,8 @@ namespace RepositoryL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateOnly>("DateBirth")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("DateBirth")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
@@ -252,7 +249,8 @@ namespace RepositoryL.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -296,6 +294,23 @@ namespace RepositoryL.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "c653cbf9-52b0-4cb5-8436-b08171dec1c3",
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = "37c5e62a-8d6a-45f2-b652-090e9059a15d",
+                            Name = "Doctor"
+                        },
+                        new
+                        {
+                            Id = "27da7809-cabc-472c-844c-98e998a509f4",
+                            Name = "Patient"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -476,6 +491,12 @@ namespace RepositoryL.Migrations
                     b.Property<int>("SpecializationId")
                         .HasColumnType("int");
 
+                    b.Property<int>("doctorid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("numberOfRequests")
+                        .HasColumnType("int");
+
                     b.Property<int>("price")
                         .HasColumnType("int");
 
@@ -487,7 +508,7 @@ namespace RepositoryL.Migrations
                         new
                         {
                             Id = 1,
-                            DateBirth = new DateOnly(1995, 12, 13),
+                            DateBirth = new DateTime(1995, 12, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ahmedali@bit.com",
                             FirstName = "Ahmed",
                             Gender = 1,
@@ -496,12 +517,14 @@ namespace RepositoryL.Migrations
                             Phone = "012345678",
                             image = "images/1.jpeg",
                             SpecializationId = 8,
+                            doctorid = 0,
+                            numberOfRequests = 0,
                             price = 200
                         },
                         new
                         {
                             Id = 2,
-                            DateBirth = new DateOnly(1978, 5, 2),
+                            DateBirth = new DateTime(1978, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mohamedhosam@bit.com",
                             FirstName = "Mohamed",
                             Gender = 1,
@@ -510,12 +533,14 @@ namespace RepositoryL.Migrations
                             Phone = "02456972",
                             image = "images/2.jpeg",
                             SpecializationId = 7,
+                            doctorid = 0,
+                            numberOfRequests = 0,
                             price = 200
                         },
                         new
                         {
                             Id = 3,
-                            DateBirth = new DateOnly(1985, 10, 1),
+                            DateBirth = new DateTime(1985, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mahmoudwael@bit.com",
                             FirstName = "Mahmoud",
                             Gender = 1,
@@ -524,26 +549,30 @@ namespace RepositoryL.Migrations
                             Phone = "01246875",
                             image = "images/3.jpeg",
                             SpecializationId = 5,
+                            doctorid = 0,
+                            numberOfRequests = 0,
                             price = 200
                         },
                         new
                         {
                             Id = 4,
-                            DateBirth = new DateOnly(1992, 4, 12),
+                            DateBirth = new DateTime(1992, 4, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hamzawaleed@bit.com",
                             FirstName = "Hamza",
                             Gender = 1,
                             LastName = "Waleed",
-                            Password = "",
+                            Password = "6(@Ksr5c",
                             Phone = "012364799",
                             image = "images/4.jpeg",
                             SpecializationId = 4,
+                            doctorid = 0,
+                            numberOfRequests = 0,
                             price = 200
                         },
                         new
                         {
                             Id = 5,
-                            DateBirth = new DateOnly(1993, 3, 20),
+                            DateBirth = new DateTime(1993, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "omartaher@bit.com",
                             FirstName = "Omar",
                             Gender = 1,
@@ -552,12 +581,14 @@ namespace RepositoryL.Migrations
                             Phone = "01268958",
                             image = "images/5.jpeg",
                             SpecializationId = 1,
+                            doctorid = 0,
+                            numberOfRequests = 0,
                             price = 200
                         },
                         new
                         {
                             Id = 6,
-                            DateBirth = new DateOnly(1992, 8, 25),
+                            DateBirth = new DateTime(1992, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "yousefhamed@bit.com",
                             FirstName = "Yousef",
                             Gender = 1,
@@ -566,12 +597,14 @@ namespace RepositoryL.Migrations
                             Phone = "0145588",
                             image = "images/6.jpeg",
                             SpecializationId = 2,
+                            doctorid = 0,
+                            numberOfRequests = 0,
                             price = 200
                         },
                         new
                         {
                             Id = 7,
-                            DateBirth = new DateOnly(1997, 7, 5),
+                            DateBirth = new DateTime(1997, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "khaledramzy@bit.com",
                             FirstName = "Khaled",
                             Gender = 1,
@@ -580,26 +613,30 @@ namespace RepositoryL.Migrations
                             Phone = "013678526",
                             image = "images/7.jpeg",
                             SpecializationId = 3,
+                            doctorid = 0,
+                            numberOfRequests = 0,
                             price = 200
                         },
                         new
                         {
                             Id = 8,
-                            DateBirth = new DateOnly(1999, 11, 1),
+                            DateBirth = new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "yasersayed@bit.com",
                             FirstName = "yaser",
-                            Gender = 0,
+                            Gender = 1,
                             LastName = "sayed",
                             Password = "P<!=W6fe",
-                            Phone = "",
+                            Phone = "01369885",
                             image = "images/8.jpeg",
                             SpecializationId = 9,
+                            doctorid = 0,
+                            numberOfRequests = 0,
                             price = 200
                         },
                         new
                         {
                             Id = 9,
-                            DateBirth = new DateOnly(1987, 5, 10),
+                            DateBirth = new DateTime(1987, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "amrahmed",
                             FirstName = "Amr",
                             Gender = 1,
@@ -608,26 +645,30 @@ namespace RepositoryL.Migrations
                             Phone = "0123648796",
                             image = "images/9.jpeg",
                             SpecializationId = 10,
+                            doctorid = 0,
+                            numberOfRequests = 0,
                             price = 200
                         },
                         new
                         {
                             Id = 10,
-                            DateBirth = new DateOnly(1995, 2, 9),
+                            DateBirth = new DateTime(1995, 2, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ayaahmed",
                             FirstName = "Aya",
                             Gender = 0,
                             LastName = "Ahmed",
                             Password = "ynz#Jpsg",
-                            Phone = "",
+                            Phone = "0123546",
                             image = "images/10.jpeg",
                             SpecializationId = 11,
+                            doctorid = 0,
+                            numberOfRequests = 0,
                             price = 200
                         },
                         new
                         {
                             Id = 11,
-                            DateBirth = new DateOnly(1996, 6, 16),
+                            DateBirth = new DateTime(1996, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hanaamagdy@bit.com",
                             FirstName = "Hanaa",
                             Gender = 0,
@@ -636,12 +677,14 @@ namespace RepositoryL.Migrations
                             Phone = "0197586413",
                             image = "images/11.jpeg",
                             SpecializationId = 12,
+                            doctorid = 0,
+                            numberOfRequests = 0,
                             price = 200
                         },
                         new
                         {
                             Id = 12,
-                            DateBirth = new DateOnly(1998, 4, 6),
+                            DateBirth = new DateTime(1998, 4, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "halamodamed@bit.com",
                             FirstName = "Hala",
                             Gender = 0,
@@ -650,12 +693,14 @@ namespace RepositoryL.Migrations
                             Phone = "010955487652",
                             image = "images/12.jpeg",
                             SpecializationId = 8,
+                            doctorid = 0,
+                            numberOfRequests = 0,
                             price = 200
                         },
                         new
                         {
                             Id = 13,
-                            DateBirth = new DateOnly(1994, 2, 28),
+                            DateBirth = new DateTime(1994, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "fatmasafwt@@bit.com",
                             FirstName = "Fatma",
                             Gender = 0,
@@ -664,12 +709,14 @@ namespace RepositoryL.Migrations
                             Phone = "01269753684",
                             image = "images/13.jpeg",
                             SpecializationId = 12,
+                            doctorid = 0,
+                            numberOfRequests = 0,
                             price = 200
                         },
                         new
                         {
                             Id = 14,
-                            DateBirth = new DateOnly(1991, 6, 3),
+                            DateBirth = new DateTime(1991, 6, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "masaadham@bit.com",
                             FirstName = "yara",
                             Gender = 0,
@@ -678,6 +725,8 @@ namespace RepositoryL.Migrations
                             Phone = "0125873",
                             image = "images/14.jpeg",
                             SpecializationId = 3,
+                            doctorid = 0,
+                            numberOfRequests = 0,
                             price = 200
                         });
                 });
@@ -686,8 +735,8 @@ namespace RepositoryL.Migrations
                 {
                     b.HasBaseType("Domain.Entities.User");
 
-                    b.Property<long>("NumberofRequest")
-                        .HasColumnType("bigint");
+                    b.Property<int>("NumberofRequest")
+                        .HasColumnType("int");
 
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
