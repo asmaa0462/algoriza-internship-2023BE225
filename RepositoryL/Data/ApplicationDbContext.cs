@@ -1,15 +1,18 @@
 ﻿using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace RepositoryL.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
         {
@@ -26,6 +29,7 @@ namespace RepositoryL.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Doctor>()
                 .HasOne<Specialization>()
                 .WithMany()
@@ -79,9 +83,16 @@ namespace RepositoryL.Data
                 .HasOne<Discount>()
                 .WithMany()
                 .HasForeignKey(p => p.discountId);
-
+            //Specialization Seed
             modelBuilder.seed();
+            //Admin Seed doctor Data
+            modelBuilder.doctorseed();
+            
+            //RolesSeed
+            modelBuilder.rolesseed();
+           
         }
+
     }
 }
 
